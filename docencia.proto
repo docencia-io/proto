@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option go_package = "github.com/docencia-io/proto";
+
+package coreGRPC;
+
+// The signer service definition.
+service Core {
+  // Sends a file to sign.
+  rpc ChangePassword(ChangePasswordRequest) returns(ChangePasswordReply){}
+  rpc FindOrCreateUser(FindOrCreateUserRequest) returns(FindOrCreateUserReply){}
+  rpc GetInfoByID(InfoIDRequest) returns(InfoReply){}
+}
+
+// The ChangePassword request.
+message ChangePasswordRequest {
+  string email         = 1;  
+  string password      = 2;  
+}
+
+// The ChangePassword response.
+message ChangePasswordReply {
+  bool   error          = 1;
+  string message        = 2; 
+}
+
+
+// The FindOrCreateUser request.
+message FindOrCreateUserRequest {
+  string email         = 1;
+  string name          = 2;
+  string lastName      = 3;
+  string provider      = 4;
+}
+
+// The FindOrCreateUser response.
+message  FindOrCreateUserReply {
+  bool   error          = 1;
+  string message        = 2; 
+  int32 id                = 3;
+  string email          = 4;
+  string name           = 5;
+  string lastName       = 6;
+}
+
+// The InfoID request.
+message InfoIDRequest {
+  int32 id                = 1;
+  string email           = 2;  
+}
+
+// The ChangePassword response.
+message InfoReply {
+  bool   error          = 1;
+  string message        = 2;
+  string email          = 3;
+  string name           = 4;
+  string lastName       = 5;
+  string role           = 6;
+  bytes  info           = 7; 
+}
