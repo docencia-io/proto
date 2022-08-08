@@ -1,4 +1,4 @@
-# Signer Protocol Buffer
+# Core Protocol Buffer
 
 Protocol Buffer (protobuf) para firmadores.
 
@@ -27,6 +27,12 @@ export PATH=$PATH:~/go/bin
 protoc --go_out=. --go_opt=paths=source_relative \
  --go-grpc_out=. --go-grpc_opt=paths=source_relative \
  docencia.proto
+```
+
+4. Generar los archivos JS:
+
+```
+protoc-gen-grpc --js_out=import_style=commonjs,binary:./js --grpc_out=./js --proto_path . docencia.proto
 ```
 
 ## Referencias

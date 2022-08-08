@@ -1077,10 +1077,11 @@ proto.coreGRPC.InfoReply.toObject = function(includeInstance, msg) {
   var f, obj = {
     error: jspb.Message.getFieldWithDefault(msg, 1, false),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    email: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    lastname: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    role: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    id: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    email: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    lastname: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    role: jspb.Message.getFieldWithDefault(msg, 7, ""),
     info: msg.getInfo_asB64()
   };
 
@@ -1127,22 +1128,26 @@ proto.coreGRPC.InfoReply.deserializeBinaryFromReader = function(msg, reader) {
       msg.setMessage(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setEmail(value);
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setId(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
+      msg.setEmail(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setLastname(value);
+      msg.setName(value);
       break;
     case 6:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRole(value);
+      msg.setLastname(value);
       break;
     case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRole(value);
+      break;
+    case 8:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setInfo(value);
       break;
@@ -1189,38 +1194,45 @@ proto.coreGRPC.InfoReply.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getEmail();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeInt32(
       3,
       f
     );
   }
-  f = message.getName();
+  f = message.getEmail();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getLastname();
+  f = message.getName();
   if (f.length > 0) {
     writer.writeString(
       5,
       f
     );
   }
-  f = message.getRole();
+  f = message.getLastname();
   if (f.length > 0) {
     writer.writeString(
       6,
       f
     );
   }
+  f = message.getRole();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
+      f
+    );
+  }
   f = message.getInfo_asU8();
   if (f.length > 0) {
     writer.writeBytes(
-      7,
+      8,
       f
     );
   }
@@ -1260,76 +1272,91 @@ proto.coreGRPC.InfoReply.prototype.setMessage = function(value) {
 
 
 /**
- * optional string email = 3;
- * @return {string}
+ * optional int32 id = 3;
+ * @return {number}
  */
-proto.coreGRPC.InfoReply.prototype.getEmail = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+proto.coreGRPC.InfoReply.prototype.getId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
-/** @param {string} value */
-proto.coreGRPC.InfoReply.prototype.setEmail = function(value) {
+/** @param {number} value */
+proto.coreGRPC.InfoReply.prototype.setId = function(value) {
   jspb.Message.setField(this, 3, value);
 };
 
 
 /**
- * optional string name = 4;
+ * optional string email = 4;
  * @return {string}
  */
-proto.coreGRPC.InfoReply.prototype.getName = function() {
+proto.coreGRPC.InfoReply.prototype.getEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
 /** @param {string} value */
-proto.coreGRPC.InfoReply.prototype.setName = function(value) {
+proto.coreGRPC.InfoReply.prototype.setEmail = function(value) {
   jspb.Message.setField(this, 4, value);
 };
 
 
 /**
- * optional string lastName = 5;
+ * optional string name = 5;
  * @return {string}
  */
-proto.coreGRPC.InfoReply.prototype.getLastname = function() {
+proto.coreGRPC.InfoReply.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
 /** @param {string} value */
-proto.coreGRPC.InfoReply.prototype.setLastname = function(value) {
+proto.coreGRPC.InfoReply.prototype.setName = function(value) {
   jspb.Message.setField(this, 5, value);
 };
 
 
 /**
- * optional string role = 6;
+ * optional string lastName = 6;
  * @return {string}
  */
-proto.coreGRPC.InfoReply.prototype.getRole = function() {
+proto.coreGRPC.InfoReply.prototype.getLastname = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
 /** @param {string} value */
-proto.coreGRPC.InfoReply.prototype.setRole = function(value) {
+proto.coreGRPC.InfoReply.prototype.setLastname = function(value) {
   jspb.Message.setField(this, 6, value);
 };
 
 
 /**
- * optional bytes info = 7;
- * @return {!(string|Uint8Array)}
+ * optional string role = 7;
+ * @return {string}
  */
-proto.coreGRPC.InfoReply.prototype.getInfo = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+proto.coreGRPC.InfoReply.prototype.getRole = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/** @param {string} value */
+proto.coreGRPC.InfoReply.prototype.setRole = function(value) {
+  jspb.Message.setField(this, 7, value);
 };
 
 
 /**
- * optional bytes info = 7;
+ * optional bytes info = 8;
+ * @return {!(string|Uint8Array)}
+ */
+proto.coreGRPC.InfoReply.prototype.getInfo = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * optional bytes info = 8;
  * This is a type-conversion wrapper around `getInfo()`
  * @return {string}
  */
@@ -1340,7 +1367,7 @@ proto.coreGRPC.InfoReply.prototype.getInfo_asB64 = function() {
 
 
 /**
- * optional bytes info = 7;
+ * optional bytes info = 8;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getInfo()`
@@ -1354,7 +1381,7 @@ proto.coreGRPC.InfoReply.prototype.getInfo_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.coreGRPC.InfoReply.prototype.setInfo = function(value) {
-  jspb.Message.setField(this, 7, value);
+  jspb.Message.setField(this, 8, value);
 };
 
 

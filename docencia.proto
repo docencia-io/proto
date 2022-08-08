@@ -53,9 +53,10 @@ message InfoIDRequest {
 message InfoReply {
   bool   error          = 1;
   string message        = 2;
-  string email          = 3;
-  string name           = 4;
-  string lastName       = 5;
-  string role           = 6;
-  bytes  info           = 7; 
+  int32  id             = 3;
+  string email          = 4;
+  string name           = 5;
+  string lastName       = 6;
+  string role           = 7;
+  bytes  info           = 8; 
 }
