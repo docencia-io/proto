@@ -60,3 +60,19 @@ message InfoReply {
   string role           = 7;
   bytes  info           = 8; 
 }
+
+service Compiler {
+  rpc Compiler(CodeRequest) returns(CodeReply){}
+}
+
+message CodeRequest {
+  int32 id                = 1;
+  string code           = 2;  
+}
+
+// The ChangePassword response.
+message CodeReply {
+  bool   error          = 1;
+  string message        = 2;
+  string Link           = 3;
+}

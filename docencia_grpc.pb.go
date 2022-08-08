@@ -177,3 +177,89 @@ var Core_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "docencia.proto",
 }
+
+// CompilerClient is the client API for Compiler service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CompilerClient interface {
+	Compiler(ctx context.Context, in *CodeRequest, opts ...grpc.CallOption) (*CodeReply, error)
+}
+
+type compilerClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCompilerClient(cc grpc.ClientConnInterface) CompilerClient {
+	return &compilerClient{cc}
+}
+
+func (c *compilerClient) Compiler(ctx context.Context, in *CodeRequest, opts ...grpc.CallOption) (*CodeReply, error) {
+	out := new(CodeReply)
+	err := c.cc.Invoke(ctx, "/coreGRPC.Compiler/Compiler", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CompilerServer is the server API for Compiler service.
+// All implementations must embed UnimplementedCompilerServer
+// for forward compatibility
+type CompilerServer interface {
+	Compiler(context.Context, *CodeRequest) (*CodeReply, error)
+	mustEmbedUnimplementedCompilerServer()
+}
+
+// UnimplementedCompilerServer must be embedded to have forward compatible implementations.
+type UnimplementedCompilerServer struct {
+}
+
+func (UnimplementedCompilerServer) Compiler(context.Context, *CodeRequest) (*CodeReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Compiler not implemented")
+}
+func (UnimplementedCompilerServer) mustEmbedUnimplementedCompilerServer() {}
+
+// UnsafeCompilerServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CompilerServer will
+// result in compilation errors.
+type UnsafeCompilerServer interface {
+	mustEmbedUnimplementedCompilerServer()
+}
+
+func RegisterCompilerServer(s grpc.ServiceRegistrar, srv CompilerServer) {
+	s.RegisterService(&Compiler_ServiceDesc, srv)
+}
+
+func _Compiler_Compiler_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CompilerServer).Compiler(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/coreGRPC.Compiler/Compiler",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CompilerServer).Compiler(ctx, req.(*CodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Compiler_ServiceDesc is the grpc.ServiceDesc for Compiler service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Compiler_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "coreGRPC.Compiler",
+	HandlerType: (*CompilerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Compiler",
+			Handler:    _Compiler_Compiler_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "docencia.proto",
+}
