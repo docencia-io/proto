@@ -26,6 +26,28 @@ function deserialize_coreGRPC_ChangePasswordRequest(buffer_arg) {
   return docencia_pb.ChangePasswordRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_coreGRPC_CodeReply(arg) {
+  if (!(arg instanceof docencia_pb.CodeReply)) {
+    throw new Error('Expected argument of type coreGRPC.CodeReply');
+  }
+  return new Buffer(arg.serializeBinary());
+}
+
+function deserialize_coreGRPC_CodeReply(buffer_arg) {
+  return docencia_pb.CodeReply.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_coreGRPC_CodeRequest(arg) {
+  if (!(arg instanceof docencia_pb.CodeRequest)) {
+    throw new Error('Expected argument of type coreGRPC.CodeRequest');
+  }
+  return new Buffer(arg.serializeBinary());
+}
+
+function deserialize_coreGRPC_CodeRequest(buffer_arg) {
+  return docencia_pb.CodeRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_coreGRPC_FindOrCreateUserReply(arg) {
   if (!(arg instanceof docencia_pb.FindOrCreateUserReply)) {
     throw new Error('Expected argument of type coreGRPC.FindOrCreateUserReply');
@@ -110,3 +132,18 @@ var CoreService = exports.CoreService = {
 };
 
 exports.CoreClient = grpc.makeGenericClientConstructor(CoreService);
+var CompilerService = exports.CompilerService = {
+  compiler: {
+    path: '/coreGRPC.Compiler/Compiler',
+    requestStream: false,
+    responseStream: false,
+    requestType: docencia_pb.CodeRequest,
+    responseType: docencia_pb.CodeReply,
+    requestSerialize: serialize_coreGRPC_CodeRequest,
+    requestDeserialize: deserialize_coreGRPC_CodeRequest,
+    responseSerialize: serialize_coreGRPC_CodeReply,
+    responseDeserialize: deserialize_coreGRPC_CodeReply,
+  },
+};
+
+exports.CompilerClient = grpc.makeGenericClientConstructor(CompilerService);

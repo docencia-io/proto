@@ -58,7 +58,8 @@ message InfoReply {
   string name           = 5;
   string lastName       = 6;
   string role           = 7;
-  bytes  info           = 8; 
+  string token          = 8;
+  bytes  info           = 9; 
 }
 
 service Compiler {
