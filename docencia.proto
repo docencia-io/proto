@@ -89,9 +89,10 @@ service Gitlab {
 // The Push request.
 message PushRequest {
   string token         = 1;  
-  string lang      = 2; 
-  string name         = 3;  
-  bytes content      = 4; 
+  string repository          = 2;
+  string lang      = 3; 
+  string name         = 4;  
+  bytes content      = 5; 
 }
 
 // The ChangePassword response.
@@ -103,8 +104,9 @@ message PushReply {
 
 // The Push request.
 message PullRequest {
-  string token         = 1;  
-  string name         = 2;  
+  string token         = 1;
+  string repository    = 2;  
+  string name          = 3;  
   
 }
 
@@ -118,8 +120,9 @@ message PullReply {
 
 // The List request.
 message ListRequest {
-  string token         = 1;  
-  string name         = 2;  
+  string token         = 1;
+  string repository    = 2;  
+  string name          = 3;  
   
 }
 

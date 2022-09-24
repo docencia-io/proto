@@ -1835,8 +1835,9 @@ proto.coreGRPC.PushRequest.prototype.toObject = function(opt_includeInstance) {
 proto.coreGRPC.PushRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     token: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    lang: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    repository: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    lang: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 4, ""),
     content: msg.getContent_asB64()
   };
 
@@ -1880,13 +1881,17 @@ proto.coreGRPC.PushRequest.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setLang(value);
+      msg.setRepository(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
+      msg.setLang(value);
       break;
     case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
+    case 5:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setContent(value);
       break;
@@ -1926,24 +1931,31 @@ proto.coreGRPC.PushRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getLang();
+  f = message.getRepository();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getName();
+  f = message.getLang();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
   f = message.getContent_asU8();
   if (f.length > 0) {
     writer.writeBytes(
-      4,
+      5,
       f
     );
   }
@@ -1966,46 +1978,61 @@ proto.coreGRPC.PushRequest.prototype.setToken = function(value) {
 
 
 /**
- * optional string lang = 2;
+ * optional string repository = 2;
  * @return {string}
  */
-proto.coreGRPC.PushRequest.prototype.getLang = function() {
+proto.coreGRPC.PushRequest.prototype.getRepository = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /** @param {string} value */
-proto.coreGRPC.PushRequest.prototype.setLang = function(value) {
+proto.coreGRPC.PushRequest.prototype.setRepository = function(value) {
   jspb.Message.setField(this, 2, value);
 };
 
 
 /**
- * optional string name = 3;
+ * optional string lang = 3;
  * @return {string}
  */
-proto.coreGRPC.PushRequest.prototype.getName = function() {
+proto.coreGRPC.PushRequest.prototype.getLang = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /** @param {string} value */
-proto.coreGRPC.PushRequest.prototype.setName = function(value) {
+proto.coreGRPC.PushRequest.prototype.setLang = function(value) {
   jspb.Message.setField(this, 3, value);
 };
 
 
 /**
- * optional bytes content = 4;
- * @return {!(string|Uint8Array)}
+ * optional string name = 4;
+ * @return {string}
  */
-proto.coreGRPC.PushRequest.prototype.getContent = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+proto.coreGRPC.PushRequest.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/** @param {string} value */
+proto.coreGRPC.PushRequest.prototype.setName = function(value) {
+  jspb.Message.setField(this, 4, value);
 };
 
 
 /**
- * optional bytes content = 4;
+ * optional bytes content = 5;
+ * @return {!(string|Uint8Array)}
+ */
+proto.coreGRPC.PushRequest.prototype.getContent = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * optional bytes content = 5;
  * This is a type-conversion wrapper around `getContent()`
  * @return {string}
  */
@@ -2016,7 +2043,7 @@ proto.coreGRPC.PushRequest.prototype.getContent_asB64 = function() {
 
 
 /**
- * optional bytes content = 4;
+ * optional bytes content = 5;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getContent()`
@@ -2030,7 +2057,7 @@ proto.coreGRPC.PushRequest.prototype.getContent_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.coreGRPC.PushRequest.prototype.setContent = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setField(this, 5, value);
 };
 
 
@@ -2253,7 +2280,8 @@ proto.coreGRPC.PullRequest.prototype.toObject = function(opt_includeInstance) {
 proto.coreGRPC.PullRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     token: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, "")
+    repository: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -2296,6 +2324,10 @@ proto.coreGRPC.PullRequest.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
+      msg.setRepository(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
     default:
@@ -2334,10 +2366,17 @@ proto.coreGRPC.PullRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getName();
+  f = message.getRepository();
   if (f.length > 0) {
     writer.writeString(
       2,
+      f
+    );
+  }
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
       f
     );
   }
@@ -2360,17 +2399,32 @@ proto.coreGRPC.PullRequest.prototype.setToken = function(value) {
 
 
 /**
- * optional string name = 2;
+ * optional string repository = 2;
  * @return {string}
  */
-proto.coreGRPC.PullRequest.prototype.getName = function() {
+proto.coreGRPC.PullRequest.prototype.getRepository = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /** @param {string} value */
-proto.coreGRPC.PullRequest.prototype.setName = function(value) {
+proto.coreGRPC.PullRequest.prototype.setRepository = function(value) {
   jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional string name = 3;
+ * @return {string}
+ */
+proto.coreGRPC.PullRequest.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.coreGRPC.PullRequest.prototype.setName = function(value) {
+  jspb.Message.setField(this, 3, value);
 };
 
 
@@ -2647,7 +2701,8 @@ proto.coreGRPC.ListRequest.prototype.toObject = function(opt_includeInstance) {
 proto.coreGRPC.ListRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     token: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, "")
+    repository: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -2690,6 +2745,10 @@ proto.coreGRPC.ListRequest.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
+      msg.setRepository(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
     default:
@@ -2728,10 +2787,17 @@ proto.coreGRPC.ListRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getName();
+  f = message.getRepository();
   if (f.length > 0) {
     writer.writeString(
       2,
+      f
+    );
+  }
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
       f
     );
   }
@@ -2754,17 +2820,32 @@ proto.coreGRPC.ListRequest.prototype.setToken = function(value) {
 
 
 /**
- * optional string name = 2;
+ * optional string repository = 2;
  * @return {string}
  */
-proto.coreGRPC.ListRequest.prototype.getName = function() {
+proto.coreGRPC.ListRequest.prototype.getRepository = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /** @param {string} value */
-proto.coreGRPC.ListRequest.prototype.setName = function(value) {
+proto.coreGRPC.ListRequest.prototype.setRepository = function(value) {
   jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional string name = 3;
+ * @return {string}
+ */
+proto.coreGRPC.ListRequest.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.coreGRPC.ListRequest.prototype.setName = function(value) {
+  jspb.Message.setField(this, 3, value);
 };
 
 
