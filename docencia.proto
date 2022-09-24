@@ -91,13 +91,43 @@ message PushRequest {
   string token         = 1;  
   string lang      = 2; 
   string name         = 3;  
-  string content      = 2; 
+  bytes content      = 4; 
 }
 
 // The ChangePassword response.
-message PushReplay {
+message PushReply {
   bool   error          = 1;
   string message        = 2; 
+}
+
+
+// The Push request.
+message PullRequest {
+  string token         = 1;  
+  string name         = 2;  
+  
+}
+
+// The Pull response.
+message PullReply {
+  bool   error          = 1;
+  string message        = 2; 
+  string lang           = 3; 
+  string content        = 4; 
+}
+
+// The List request.
+message ListRequest {
+  string token         = 1;  
+  string name         = 2;  
+  
+}
+
+// The List response.
+message ListReply {
+  bool   error          = 1;
+  string message        = 2; 
+  bytes files           = 3; 
 }
 
 

@@ -92,6 +92,61 @@ function deserialize_coreGRPC_InfoReply(buffer_arg) {
   return docencia_pb.InfoReply.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_coreGRPC_ListReply(arg) {
+  if (!(arg instanceof docencia_pb.ListReply)) {
+    throw new Error('Expected argument of type coreGRPC.ListReply');
+  }
+  return new Buffer(arg.serializeBinary());
+}
+
+function deserialize_coreGRPC_ListReply(buffer_arg) {
+  return docencia_pb.ListReply.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_coreGRPC_ListRequest(arg) {
+  if (!(arg instanceof docencia_pb.ListRequest)) {
+    throw new Error('Expected argument of type coreGRPC.ListRequest');
+  }
+  return new Buffer(arg.serializeBinary());
+}
+
+function deserialize_coreGRPC_ListRequest(buffer_arg) {
+  return docencia_pb.ListRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_coreGRPC_PullRequest(arg) {
+  if (!(arg instanceof docencia_pb.PullRequest)) {
+    throw new Error('Expected argument of type coreGRPC.PullRequest');
+  }
+  return new Buffer(arg.serializeBinary());
+}
+
+function deserialize_coreGRPC_PullRequest(buffer_arg) {
+  return docencia_pb.PullRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_coreGRPC_PushReply(arg) {
+  if (!(arg instanceof docencia_pb.PushReply)) {
+    throw new Error('Expected argument of type coreGRPC.PushReply');
+  }
+  return new Buffer(arg.serializeBinary());
+}
+
+function deserialize_coreGRPC_PushReply(buffer_arg) {
+  return docencia_pb.PushReply.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_coreGRPC_PushRequest(arg) {
+  if (!(arg instanceof docencia_pb.PushRequest)) {
+    throw new Error('Expected argument of type coreGRPC.PushRequest');
+  }
+  return new Buffer(arg.serializeBinary());
+}
+
+function deserialize_coreGRPC_PushRequest(buffer_arg) {
+  return docencia_pb.PushRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 
 // The signer service definition.
 var CoreService = exports.CoreService = {
@@ -147,3 +202,41 @@ var CompilerService = exports.CompilerService = {
 };
 
 exports.CompilerClient = grpc.makeGenericClientConstructor(CompilerService);
+var GitlabService = exports.GitlabService = {
+  // Sends a file to gitlab.
+  push: {
+    path: '/coreGRPC.Gitlab/Push',
+    requestStream: false,
+    responseStream: false,
+    requestType: docencia_pb.PushRequest,
+    responseType: docencia_pb.PushReply,
+    requestSerialize: serialize_coreGRPC_PushRequest,
+    requestDeserialize: deserialize_coreGRPC_PushRequest,
+    responseSerialize: serialize_coreGRPC_PushReply,
+    responseDeserialize: deserialize_coreGRPC_PushReply,
+  },
+  pull: {
+    path: '/coreGRPC.Gitlab/Pull',
+    requestStream: false,
+    responseStream: false,
+    requestType: docencia_pb.PullRequest,
+    responseType: docencia_pb.PushReply,
+    requestSerialize: serialize_coreGRPC_PullRequest,
+    requestDeserialize: deserialize_coreGRPC_PullRequest,
+    responseSerialize: serialize_coreGRPC_PushReply,
+    responseDeserialize: deserialize_coreGRPC_PushReply,
+  },
+  list: {
+    path: '/coreGRPC.Gitlab/List',
+    requestStream: false,
+    responseStream: false,
+    requestType: docencia_pb.ListRequest,
+    responseType: docencia_pb.ListReply,
+    requestSerialize: serialize_coreGRPC_ListRequest,
+    requestDeserialize: deserialize_coreGRPC_ListRequest,
+    responseSerialize: serialize_coreGRPC_ListReply,
+    responseDeserialize: deserialize_coreGRPC_ListReply,
+  },
+};
+
+exports.GitlabClient = grpc.makeGenericClientConstructor(GitlabService);
