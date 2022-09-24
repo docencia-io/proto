@@ -77,3 +77,29 @@ message CodeReply {
   string message        = 2;
   string Link           = 3;
 }
+
+
+service Gitlab {
+  // Sends a file to gitlab.
+  rpc Push(PushRequest) returns(PushReply){}
+  rpc Pull(PullRequest) returns(PushReply){}
+  rpc List(ListRequest) returns(ListReply){}
+}
+
+// The Push request.
+message PushRequest {
+  string token         = 1;  
+  string lang      = 2; 
+  string name         = 3;  
+  string content      = 2; 
+}
+
+// The ChangePassword response.
+message PushReplay {
+  bool   error          = 1;
+  string message        = 2; 
+}
+
+
+
+
