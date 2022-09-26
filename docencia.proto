@@ -82,7 +82,7 @@ message CodeReply {
 service Gitlab {
   // Sends a file to gitlab.
   rpc Push(PushRequest) returns(PushReply){}
-  rpc Pull(PullRequest) returns(PushReply){}
+  rpc Pull(PullRequest) returns(PullReply){}
   rpc List(ListRequest) returns(ListReply){}
 }
 
@@ -93,6 +93,7 @@ message PushRequest {
   string lang      = 3; 
   string name         = 4;  
   bytes content      = 5; 
+  int32 ProjectID    = 6;
 }
 
 // The ChangePassword response.
@@ -106,7 +107,8 @@ message PushReply {
 message PullRequest {
   string token         = 1;
   string repository    = 2;  
-  string name          = 3;  
+  string name          = 3;
+  int32 ProjectID    = 4;
   
 }
 
@@ -114,16 +116,15 @@ message PullRequest {
 message PullReply {
   bool   error          = 1;
   string message        = 2; 
-  string lang           = 3; 
-  string content        = 4; 
+  bytes content        = 3; 
 }
 
 // The List request.
 message ListRequest {
   string token         = 1;
   string repository    = 2;  
-  string name          = 3;  
-  
+  string name          = 3; 
+  int32 ProjectID    = 4;
 }
 
 // The List response.
