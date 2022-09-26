@@ -270,7 +270,7 @@ var Compiler_ServiceDesc = grpc.ServiceDesc{
 type GitlabClient interface {
 	// Sends a file to gitlab.
 	Push(ctx context.Context, in *PushRequest, opts ...grpc.CallOption) (*PushReply, error)
-	Pull(ctx context.Context, in *PullRequest, opts ...grpc.CallOption) (*PushReply, error)
+	Pull(ctx context.Context, in *PullRequest, opts ...grpc.CallOption) (*PullReply, error)
 	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListReply, error)
 }
 
@@ -291,8 +291,8 @@ func (c *gitlabClient) Push(ctx context.Context, in *PushRequest, opts ...grpc.C
 	return out, nil
 }
 
-func (c *gitlabClient) Pull(ctx context.Context, in *PullRequest, opts ...grpc.CallOption) (*PushReply, error) {
-	out := new(PushReply)
+func (c *gitlabClient) Pull(ctx context.Context, in *PullRequest, opts ...grpc.CallOption) (*PullReply, error) {
+	out := new(PullReply)
 	err := c.cc.Invoke(ctx, "/coreGRPC.Gitlab/Pull", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -315,7 +315,7 @@ func (c *gitlabClient) List(ctx context.Context, in *ListRequest, opts ...grpc.C
 type GitlabServer interface {
 	// Sends a file to gitlab.
 	Push(context.Context, *PushRequest) (*PushReply, error)
-	Pull(context.Context, *PullRequest) (*PushReply, error)
+	Pull(context.Context, *PullRequest) (*PullReply, error)
 	List(context.Context, *ListRequest) (*ListReply, error)
 	mustEmbedUnimplementedGitlabServer()
 }
@@ -327,7 +327,7 @@ type UnimplementedGitlabServer struct {
 func (UnimplementedGitlabServer) Push(context.Context, *PushRequest) (*PushReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Push not implemented")
 }
-func (UnimplementedGitlabServer) Pull(context.Context, *PullRequest) (*PushReply, error) {
+func (UnimplementedGitlabServer) Pull(context.Context, *PullRequest) (*PullReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Pull not implemented")
 }
 func (UnimplementedGitlabServer) List(context.Context, *ListRequest) (*ListReply, error) {

@@ -114,6 +114,17 @@ function deserialize_coreGRPC_ListRequest(buffer_arg) {
   return docencia_pb.ListRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_coreGRPC_PullReply(arg) {
+  if (!(arg instanceof docencia_pb.PullReply)) {
+    throw new Error('Expected argument of type coreGRPC.PullReply');
+  }
+  return new Buffer(arg.serializeBinary());
+}
+
+function deserialize_coreGRPC_PullReply(buffer_arg) {
+  return docencia_pb.PullReply.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_coreGRPC_PullRequest(arg) {
   if (!(arg instanceof docencia_pb.PullRequest)) {
     throw new Error('Expected argument of type coreGRPC.PullRequest');
@@ -220,11 +231,11 @@ var GitlabService = exports.GitlabService = {
     requestStream: false,
     responseStream: false,
     requestType: docencia_pb.PullRequest,
-    responseType: docencia_pb.PushReply,
+    responseType: docencia_pb.PullReply,
     requestSerialize: serialize_coreGRPC_PullRequest,
     requestDeserialize: deserialize_coreGRPC_PullRequest,
-    responseSerialize: serialize_coreGRPC_PushReply,
-    responseDeserialize: deserialize_coreGRPC_PushReply,
+    responseSerialize: serialize_coreGRPC_PullReply,
+    responseDeserialize: deserialize_coreGRPC_PullReply,
   },
   list: {
     path: '/coreGRPC.Gitlab/List',

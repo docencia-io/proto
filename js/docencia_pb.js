@@ -2477,8 +2477,7 @@ proto.coreGRPC.PullReply.toObject = function(includeInstance, msg) {
   var f, obj = {
     error: jspb.Message.getFieldWithDefault(msg, 1, false),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    lang: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    content: jspb.Message.getFieldWithDefault(msg, 4, "")
+    content: msg.getContent_asB64()
   };
 
   if (includeInstance) {
@@ -2524,11 +2523,7 @@ proto.coreGRPC.PullReply.deserializeBinaryFromReader = function(msg, reader) {
       msg.setMessage(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setLang(value);
-      break;
-    case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setContent(value);
       break;
     default:
@@ -2574,17 +2569,10 @@ proto.coreGRPC.PullReply.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getLang();
+  f = message.getContent_asU8();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeBytes(
       3,
-      f
-    );
-  }
-  f = message.getContent();
-  if (f.length > 0) {
-    writer.writeString(
-      4,
       f
     );
   }
@@ -2624,32 +2612,41 @@ proto.coreGRPC.PullReply.prototype.setMessage = function(value) {
 
 
 /**
- * optional string lang = 3;
- * @return {string}
+ * optional bytes content = 3;
+ * @return {!(string|Uint8Array)}
  */
-proto.coreGRPC.PullReply.prototype.getLang = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/** @param {string} value */
-proto.coreGRPC.PullReply.prototype.setLang = function(value) {
-  jspb.Message.setField(this, 3, value);
+proto.coreGRPC.PullReply.prototype.getContent = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * optional string content = 4;
+ * optional bytes content = 3;
+ * This is a type-conversion wrapper around `getContent()`
  * @return {string}
  */
-proto.coreGRPC.PullReply.prototype.getContent = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+proto.coreGRPC.PullReply.prototype.getContent_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getContent()));
 };
 
 
-/** @param {string} value */
+/**
+ * optional bytes content = 3;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getContent()`
+ * @return {!Uint8Array}
+ */
+proto.coreGRPC.PullReply.prototype.getContent_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getContent()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
 proto.coreGRPC.PullReply.prototype.setContent = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setField(this, 3, value);
 };
 
 
