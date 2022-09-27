@@ -2976,7 +2976,8 @@ proto.coreGRPC.ListReply.toObject = function(includeInstance, msg) {
   var f, obj = {
     error: jspb.Message.getFieldWithDefault(msg, 1, false),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    files: msg.getFiles_asB64()
+    files: msg.getFiles_asB64(),
+    projectid: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -3025,6 +3026,10 @@ proto.coreGRPC.ListReply.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setFiles(value);
       break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setProjectid(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -3072,6 +3077,13 @@ proto.coreGRPC.ListReply.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeBytes(
       3,
+      f
+    );
+  }
+  f = message.getProjectid();
+  if (f !== 0) {
+    writer.writeInt32(
+      4,
       f
     );
   }
@@ -3146,6 +3158,21 @@ proto.coreGRPC.ListReply.prototype.getFiles_asU8 = function() {
 /** @param {!(string|Uint8Array)} value */
 proto.coreGRPC.ListReply.prototype.setFiles = function(value) {
   jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * optional int32 ProjectID = 4;
+ * @return {number}
+ */
+proto.coreGRPC.ListReply.prototype.getProjectid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.coreGRPC.ListReply.prototype.setProjectid = function(value) {
+  jspb.Message.setField(this, 4, value);
 };
 
 
